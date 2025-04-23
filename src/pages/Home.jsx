@@ -18,16 +18,13 @@ const Home = () => {
     getAllJobs();
   }, [search]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    getAllJobs();
-  };
+ 
 
   if (!jobs) return <p>Loading...</p>;
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Job Listings</h2>
-      <form onSubmit={handleSearch} className="sm:flex gap-4 mb-4 items-center">
+      <div  className="sm:flex gap-4 mb-4 items-center">
         <p>Filter</p>
         <div className="relative flex items-center w-full">
           <input
@@ -37,11 +34,9 @@ const Home = () => {
             className="w-full p-2 border rounded"
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button className="absolute right-2 cursor-pointer" type="submit">
-            <IoSearch className="text-2xl " />
-          </button>
+          
         </div>
-      </form>
+      </div>
       <div>
         <div className="  flex flex-col justify-center gap-4">
           {jobs.length > 0 ? (
