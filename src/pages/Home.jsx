@@ -6,12 +6,14 @@ import { IoSearch } from "react-icons/io5";
 const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   async function getAllJobs() {
     const query = search ? `?search=${search}` : "";
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}/api/jobs${query}`
     );
     setJobs(response.data);
+    setLoading(false);
   }
   console.log(jobs);
   useEffect(() => {
@@ -20,7 +22,7 @@ const Home = () => {
 
  
 
-  if (!jobs) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Job Listings</h2>

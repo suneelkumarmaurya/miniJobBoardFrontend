@@ -5,6 +5,7 @@ import { IoMdArrowBack } from "react-icons/io";
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   async function getJobDetails(id) {
     try {
@@ -12,6 +13,7 @@ const JobDetails = () => {
         `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`
       );
       setJob(response.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +23,7 @@ const JobDetails = () => {
     getJobDetails(id);
   }, [id]);
 
-  if (!job) return <p className="text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-gray-500">Loading...</p>;
 
   return (
     <>
