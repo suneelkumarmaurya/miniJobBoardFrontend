@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import {toast} from "react-toastify"
 const AddJob = () => {
   const [form, setForm] = useState({
     title: "",
@@ -24,6 +24,10 @@ const AddJob = () => {
         `${import.meta.env.VITE_BACKEND_URL}/api/jobs`,
         form
       );
+      if(response.status ===201){
+        navigate("/")
+        toast.success(response.data.message)
+      }
       console.log(response);
     } catch (error) {}
   };
